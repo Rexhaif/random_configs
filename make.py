@@ -1,4 +1,4 @@
-#!/bin/python3
+#!python3
 # -*- coding: utf-8 -*-
 
 from argparse import ArgumentParser
@@ -10,7 +10,7 @@ user_home_dir = path.expanduser("~")
 user_conf_dir = user_home_dir + '/.config'
 this_dir = path.dirname(path.realpath(__file__))
 
-with open('configs.json', 'r') as conf_file:
+with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
     configs = load(conf_file)
     for key in configs.keys():
         configs[key]['path'] = configs[key]['path'].replace('$HOME', user_home_dir)
@@ -52,10 +52,10 @@ elif args.do == 'remove_config':
     name = input('specify the name of the program: ')
     while name == '':
         name = input('specify the name of the program: ')
-    with open('configs.json', 'r') as conf_file:
+    with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
         configs = load(conf_file)
         del configs[name] 
-    with open('configs.json', 'w') as conf_file:
+    with open(path.join(this_dir, 'configs.json'), 'w') as conf_file:
         dump(configs, conf_file)
 elif args.do == 'add_config':
     name = input('specify the name of the program: ')
@@ -69,10 +69,10 @@ elif args.do == 'add_config':
         path = input('specify the path to the config file(you can use $HOME and $CONF for relative path): ')
     if name in configs.keys():
         print('config for this program already exists, use remove_config to remove it')
-    with open('configs.json', 'r') as conf_file:
+    with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
         configs = load(conf_file)
         configs[name] = {'real_name': real_name, 'path': path} 
-    with open('configs.json', 'w') as conf_file:
+    with open(path.join(this_dir, 'configs.json'), 'w') as conf_file:
         dump(configs, conf_file)
 elif args.do == 'push':
     ans = input('this will commit all files and try to push, proceed? (y/n)')

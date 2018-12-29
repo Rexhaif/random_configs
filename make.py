@@ -15,6 +15,7 @@ with open('configs.json', 'r') as conf_file:
     for key in configs.keys():
         configs[key]['path'] = configs[key]['path'].replace('$HOME', user_home_dir)
         configs[key]['path'] = configs[key]['path'].replace('$CONF', user_conf_dir)
+    configs['_'] = ''
 
 do_options = ['copy', 'deploy', 'copy_all', 'deploy_all', 'add_config', 'remove_config', 'push']
 
@@ -36,18 +37,17 @@ def deploy(file_name, file_folder):
 
 parser = ArgumentParser(description='copy and deploy your configs\n(mine by default)')
 parser.add_argument('do', choices=do_options, help='choose what you want to do')
-parser.add_argument('files', choices=set(configs.keys()), nargs='*', type=str, help='specify programs', default='tmux')
+parser.add_argument('files', choices=configs.keys(), nargs='*', type=str, help='specify programs', default='_')
 args = parser.parse_args()
 
-print(args.files)
-
-if args.do in ['copy_all', 'deploy_all']:
-    args.files = configs.keys()
-    args.do = args.do[:-4]
-if args.do == 'copy':
-    for arg_file in args.files: copy(configs[arg_file]['real_name'], configs[arg_file]['path'])
-elif args.do == 'deploy':
-    for arg_file in args.files: deploy(configs[arg_file]['real_name'], configs[arg_file]['path'])
+if args.do == 'copy_all':
+    del configs['_']
+    for arg_file in configs.keys(): copy(configs[arg_file]['real_name'], configs[arg_file]['path'])
+    configs['_'] = ''
+elif args.do == 'deploy.all':
+    del configs['_']
+    for arg_file in configs.keys(): deploy(configs[arg_file]['real_name'], configs[arg_file]['path'])
+    configs['_'] = ''
 elif args.do == 'remove_config':
     name = input('specify the name of the program: ')
     while name == '':
@@ -85,4 +85,8 @@ elif args.do == 'push':
             system('git push')
         except:
             print('Error acured, try pushing manually')
+elif args.do == 'copy':
+    for arg_file in args.files: copy(configs[arg_file]['real_name'], configs[arg_file]['path'])
+elif args.do == 'deploy':
+    for arg_file in args.files: deploy(configs[arg_file]['real_name'], configs[arg_file]['path'])
 

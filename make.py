@@ -28,7 +28,7 @@ def copy(file_name, file_folder):
 
 def deploy(file_name, file_folder):
     if path.exists(file_folder+'/'+file_name):
-        print("copying {} from {} to {}".format(file_name, config_dir, this_folder))
+        print("copying {} from {} to {}".format(file_name, this_dir, file_folder))
         copy2(path.join(this_dir, file_name), path.join(file_folder, file_name))
     else:
         print('path to this file doesn\'t exist')
@@ -36,7 +36,7 @@ def deploy(file_name, file_folder):
 
 parser = ArgumentParser(description='copy and deploy your configs\n(mine by default)')
 parser.add_argument('do', choices=do_options, help='choose what you want to do')
-parser.add_argument('files', choices=configs.keys(), type=str, nargs='?', help='specify programs')
+parser.add_argument('files', choices=configs.keys(), nargs='*', type=string, help='specify programs')
 args = parser.parse_args()
 
 if args.do in ['copy_all', 'deploy_all']:

@@ -1,0 +1,1 @@
+{"zshrc": {"real_name": ".zshrc", "path": "$HOME"}, "tmux": {"real_name": ".tmux.conf", "path": "$HOME"}, "nvim": {"real_name": "init.vim", "path": "$CONF/nvim"}}

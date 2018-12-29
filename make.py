@@ -24,7 +24,7 @@ def copy(file_name, file_folder):
         print("copying {} from {} to {}".format(file_name, file_folder, this_dir))
         copy2(path.join(file_folder, file_name), path.join(this_dir, file_name))
     else:
-        print('path to this file doesn\'t exist')
+        print('path to this file doesn\'t exist: ' + file_folder + '/' + file_name)
     return
 
 def deploy(file_name, file_folder):
@@ -32,7 +32,7 @@ def deploy(file_name, file_folder):
         print("copying {} from {} to {}".format(file_name, this_dir, file_folder))
         copy2(path.join(this_dir, file_name), path.join(file_folder, file_name))
     else:
-        print('path to this file doesn\'t exist')
+        print('path to this file doesn\'t exist: ' + file_folder + '/' + file_name)
     return
 
 parser = ArgumentParser(description='copy and deploy your configs\n(mine by default)')
@@ -75,16 +75,16 @@ elif args.do == 'add_config':
     with open(path.join(this_dir, 'configs.json'), 'w') as conf_file:
         dump(configs, conf_file)
 elif args.do == 'push':
-    ans = input('this will commit all files and try to push, proceed? (y/n)')
+    ans = input('this will commit all files and try to push, proceed? (y/n) ')
     while ans not in ['Y', 'y', 'n', 'N']:
-        ans = input('this will commit all files and try to push, proceed? (y/n)')
+        ans = input('this will commit all files and try to push, proceed? (y/n) ')
     if ans in ['Y', 'y']:
         try:
             system('git add --all')
             system('git commit -m "added configs"')
             system('git push')
         except:
-            print('Error acured, try pushing manually')
+            print('Error occured, try pushing manually')
 elif args.do == 'copy':
     for arg_file in args.files: copy(configs[arg_file]['real_name'], configs[arg_file]['path'])
 elif args.do == 'deploy':

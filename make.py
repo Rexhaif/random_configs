@@ -80,7 +80,7 @@ elif args.do == 'push':
         try:
             system('git add --all')
             system('git commit -m "added configs"')
-            sustem('git push remote origin')
+            system('git push')
         except:
             print('Error acured, try pushing manually')
 

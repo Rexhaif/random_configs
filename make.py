@@ -36,8 +36,10 @@ def deploy(file_name, file_folder):
 
 parser = ArgumentParser(description='copy and deploy your configs\n(mine by default)')
 parser.add_argument('do', choices=do_options, help='choose what you want to do')
-parser.add_argument('files', choices=configs.keys(), nargs='*', type=string, help='specify programs')
+parser.add_argument('files', choices=set(configs.keys()), nargs='*', type=str, help='specify programs', default='tmux')
 args = parser.parse_args()
+
+print(args.files)
 
 if args.do in ['copy_all', 'deploy_all']:
     args.files = configs.keys()

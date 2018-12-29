@@ -1,5 +1,5 @@
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim')) " install vim-plug if it's not present
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 syntax enable
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif

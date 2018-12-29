@@ -7,11 +7,6 @@ ZSH_TMUX_AUTOSTART=true
 # Path to your oh-my-zsh installation.
 export ZSH="/home/danai/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
@@ -29,30 +24,12 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs  battery os_icon root
 POWERLEVEL9K_ANACONDA_LEFT_DELIMITER=(\{)
 POWERLEVEL9K_ANACONDA_RIGHT_DELIMITER=(\})
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -65,13 +42,7 @@ ENABLE_CORRECTION="true"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -83,18 +54,22 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     extract
+    colored-man-pages
+    command-not-found
     common-aliases
     copyfile
-    vi-mode
+    cp
+    #vi-mode
     sudo
     httpie
     git
     github
     tmux
-    dnf
     docker
     ruby
     gem
+    github
+    debian
     node
     npm
     python
@@ -102,7 +77,10 @@ plugins=(
     sprunge
     tmux
     web-search
+    pj
 )
+
+PROJECT_PATHS=(~/Projects)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -134,6 +112,10 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ll="exa -hgl --git"
+alias la="exa -hgla --git"
+alias ls="exa -hglG --git"
+alias l="exa -hglG --git"
 
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
@@ -154,6 +136,8 @@ bindkey "^R" history-incremental-search-backward
 set -o vi
 
 # End of lines configured by zsh-newuser-install# pack into archive
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 pk () {
     if [ $1 ] ; then
@@ -179,4 +163,6 @@ pk () {
 # miniconda3 support
 
 export PATH=/home/danai/miniconda3/bin:$PATH
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 

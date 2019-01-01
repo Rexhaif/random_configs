@@ -29,7 +29,6 @@ def copy(file_name, file_dir):
 
 def deploy(file_name, file_dir):
     directory = path.dirname(file_dir)
-    print(directory)
     if not path.exists(directory):
         makedirs(directory)
         print('creating path to ' + path.join(file_dir, file_name))

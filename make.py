@@ -33,7 +33,7 @@ def deploy(file_name, file_dir):
         makedirs(directory)
         print('creating path to ' + path.join(file_dir, file_name))
     else:
-        print("creating bakup of {} in {}: {}".format(file_name, this_dir, file_name+'.bak'))
+        print("creating bakup of {} in {}: {}".format(file_name, file_dir, file_name+'.bak'))
         copy2(path.join(file_dir, file_name), path.join(file_dir, file_name+'.bak'))
     print("copying {} from {} to {}".format(file_name, this_dir, file_dir))
     copy2(path.join(this_dir, file_name), path.join(file_dir, file_name))

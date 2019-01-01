@@ -19,20 +19,25 @@ with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
 
 do_options = ['copy', 'deploy', 'copy_all', 'deploy_all', 'add_config', 'remove_config', 'push']
 
-def copy(file_name, file_folder):
-    if path.exists(path.join(file_folder, file_name)):
-        print("copying {} from {} to {}".format(file_name, file_folder, this_dir))
-        copy2(path.join(file_folder, file_name), path.join(this_dir, file_name))
+def copy(file_name, file_dir):
+    if path.exists(path.join(file_dir, file_name)):
+        print("copying {} from {} to {}".format(file_name, file_dir, this_dir))
+        copy2(path.join(file_dir, file_name), path.join(this_dir, file_name))
     else:
-        print('path to this file doesn\'t exist: ' + file_folder + '/' + file_name)
+        print('path to this file doesn\'t exist: ' + file_dir + '/' + file_name)
     return
 
-def deploy(file_name, file_folder):
-    if path.exists(path.join(file_folder, file_name)):
-        print("copying {} from {} to {}".format(file_name, this_dir, file_folder))
-        copy2(path.join(this_dir, file_name), path.join(file_folder, file_name))
+def deploy(file_name, file_dir):
+    directory = path.dirname(file_dir)
+    print(directory)
+    if not path.exists(directory):
+        makedirs(directory)
+        print('creating path to ' + path.join(file_dir, file_name))
     else:
-        print('path to this file doesn\'t exist: ' + file_folder + '/' + file_name)
+        print("creating bakup of {} in {}: {}".format(file_name, this_dir, file_name+'.bak'))
+        copy2(path.join(file_dir, file_name), path.join(file_dir, file_name+'.bak'))
+    print("copying {} from {} to {}".format(file_name, this_dir, file_dir))
+    copy2(path.join(this_dir, file_name), path.join(file_dir, file_name))
     return
 
 parser = ArgumentParser(description='copy and deploy your configs\n(mine by default)')

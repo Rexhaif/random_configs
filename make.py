@@ -20,7 +20,7 @@ with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
 do_options = ['copy', 'deploy', 'copy_all', 'deploy_all', 'add_config', 'remove_config', 'push']
 
 def copy(file_name, file_folder):
-    if path.exists(file_folder+'/'+file_name):
+    if path.exists(path.join(file_folder, file_name)):
         print("copying {} from {} to {}".format(file_name, file_folder, this_dir))
         copy2(path.join(file_folder, file_name), path.join(this_dir, file_name))
     else:
@@ -28,7 +28,7 @@ def copy(file_name, file_folder):
     return
 
 def deploy(file_name, file_folder):
-    if path.exists(file_folder+'/'+file_name):
+    if path.exists(path.join(file_folder, file_name)):
         print("copying {} from {} to {}".format(file_name, this_dir, file_folder))
         copy2(path.join(this_dir, file_name), path.join(file_folder, file_name))
     else:
@@ -44,7 +44,7 @@ if args.do == 'copy_all':
     del configs['_']
     for arg_file in configs.keys(): copy(configs[arg_file]['real_name'], configs[arg_file]['path'])
     configs['_'] = ''
-elif args.do == 'deploy.all':
+elif args.do == 'deploy_all':
     del configs['_']
     for arg_file in configs.keys(): deploy(configs[arg_file]['real_name'], configs[arg_file]['path'])
     configs['_'] = ''

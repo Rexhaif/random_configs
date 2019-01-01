@@ -166,3 +166,11 @@ export PATH=/home/danai/miniconda3/bin:$PATH
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# added by Miniconda3 installer
+export PATH="/home/danai/miniconda3/bin:$PATH"

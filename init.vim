@@ -4,7 +4,7 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim')) " install vim-plug 
                 \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
+let &t_EI .= "\<Esc>[6 q"
 call plug#begin('~/.local/share/nvim/plugged')  " setup for vim-plug
     Plug 'junegunn/vim-plug'                    " for documentation only
     Plug 'vim-airline/vim-airline'              " improved statusline
@@ -29,7 +29,7 @@ call plug#begin('~/.local/share/nvim/plugged')  " setup for vim-plug
     Plug 'machakann/vim-highlightedyank'        " highlight yanked area
     Plug 'neomake/neomake'
     Plug 'w0rp/ale'
-    Plug 'Valloric/YouCompleteMe', {'do': './install.py --all'}
+    Plug 'Valloric/YouCompleteMe', {'do': './install.py --rust-completer'}
     "Plug 'tpope/vim-sensible'
     "Plug 'dbakker/vim-lint'
     "Plug ''
@@ -58,6 +58,7 @@ set scrolloff=7
 set nowrap
 set number
 set showmatch
+set guicursor=
 set incsearch
 set autowrite
 set whichwrap+=<,>,[,]
@@ -99,10 +100,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 "===== get off my lawn =====
-nnoremap <Left>     :echoe "Use h"<CR>
-nnoremap <Down>     :echoe "Use j"<CR>
-nnoremap <Up>       :echoe "Use k"<CR>
-nnoremap <Right>    :echoe "Use l"<CR>
+"nnoremap <Left>     :echoe "Use h"<CR>
+"nnoremap <Down>     :echoe "Use j"<CR>
+"nnoremap <Up>       :echoe "Use k"<CR>
+"nnoremap <Right>    :echoe "Use l"<CR>
 
 "===== remove whitespaces =====
 function ShowSpaces(...)

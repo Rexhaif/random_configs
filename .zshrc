@@ -92,11 +92,12 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nvim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+    # export EDITOR='vim'
+# else
+    # export EDITOR='nvim'
+# fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -161,7 +162,6 @@ pk () {
 }
 
 # miniconda3 support
-
 export PATH=/home/danai/miniconda3/bin:$PATH
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
@@ -172,5 +172,3 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-# added by Miniconda3 installer
-export PATH="/home/danai/miniconda3/bin:$PATH"

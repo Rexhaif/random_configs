@@ -9,6 +9,7 @@ from json import dump, load
 user_home_dir = path.expanduser("~")
 user_conf_dir = user_home_dir + '/.config'
 this_dir = path.dirname(path.realpath(__file__))
+do_options = ['copy', 'deploy', 'copy_all', 'deploy_all', 'add_config', 'remove_config', 'push']
 
 with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
     configs = load(conf_file)
@@ -16,8 +17,6 @@ with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
         configs[key]['path'] = configs[key]['path'].replace('$HOME', user_home_dir)
         configs[key]['path'] = configs[key]['path'].replace('$CONF', user_conf_dir)
     configs['_'] = ''
-
-do_options = ['copy', 'deploy', 'copy_all', 'deploy_all', 'add_config', 'remove_config', 'push']
 
 def copy(file_name, file_dir):
     if path.exists(path.join(file_dir, file_name)):
@@ -58,7 +57,7 @@ elif args.do == 'remove_config':
         name = input('specify the name of the program: ')
     with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
         configs = load(conf_file)
-        del configs[name] 
+        del configs[name]
     with open(path.join(this_dir, 'configs.json'), 'w') as conf_file:
         dump(configs, conf_file)
 elif args.do == 'add_config':
@@ -75,7 +74,7 @@ elif args.do == 'add_config':
         print('config for this program already exists, use remove_config to remove it')
     with open(path.join(this_dir, 'configs.json'), 'r') as conf_file:
         configs = load(conf_file)
-        configs[name] = {'real_name': real_name, 'path': path} 
+        configs[name] = {'real_name': real_name, 'path': path}
     with open(path.join(this_dir, 'configs.json'), 'w') as conf_file:
         dump(configs, conf_file)
 elif args.do == 'push':
